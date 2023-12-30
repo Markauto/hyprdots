@@ -5,7 +5,7 @@ ZSH=/usr/share/oh-my-zsh/
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # List of plugins used
-plugins=()
+plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # In case a command is not found, try to find the package that has it
@@ -44,6 +44,15 @@ function in {
     fi
 }
 
+# Run an app using proton
+
+function proton_ge_run {
+    STEAM_COMPAT_CLIENT_INSTALL_PATH="/home/mark/.steam"
+    STEAM_COMPAT_DATA_PATH="/home/mark/.local/share/Steam/steamapps/compatdata/$1" \
+    WINEPREFIX="/home/mark/.local/share/Steam/steamapps/compatdata/$1/pfx" \
+               "/home/mark/.steam/root/compatibilitytools.d/GE-Proton8-25/proton" run $2
+}
+
 # Helpful aliases
 alias  l='eza -lh  --icons=auto' # long list
 alias ls='eza -1   --icons=auto' # short list
@@ -56,6 +65,8 @@ alias pa='$aurhelper -Ss' # list availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 alias vc='code --disable-gpu' # gui code editor
+alias cdSteam='cd /home/mark/.local/share/Steam/steamapps'
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
